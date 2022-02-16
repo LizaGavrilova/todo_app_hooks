@@ -5,19 +5,33 @@ import './NewTaskForm.scss';
 
 export default function NewTaskForm({onItemAdded}) {
   const [label, setLabel] = useState('');
+  const [minValue, setMinValue] = useState('');
+  const [secValue, setSecValue] = useState('');
 
   const onLabelChange = (event) => {
     setLabel(event.target.value);
   };
 
+  const onMinChange = (event) => {
+    setMinValue(event.target.value); 
+  };
+
+  const onSecChange = (event) => {
+    setSecValue(event.target.value);
+  }
+
   const onSubmit = (event) => {
-    event.preventDefault();
-    onItemAdded(label);
-    setLabel('');
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      onItemAdded(label, minValue, secValue);
+      setLabel('');
+      setMinValue('');
+      setSecValue('');
+    };        
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className='new-todo-form' onKeyPress={onSubmit}>
       <input
         type="text"
         id='newTaskForm'
@@ -27,10 +41,28 @@ export default function NewTaskForm({onItemAdded}) {
         value={label}
         autoFocus
       />
+
+      <input className="new-todo-form__timer"
+              onChange={onMinChange}
+              placeholder="Min"
+              type="number"
+              value={minValue}
+      />
+
+      <input className="new-todo-form__timer"
+              onChange={onSecChange}
+              placeholder="Sec"
+              type="number"
+              value={secValue}
+      />
     </form>
   );
 };
 
+NewTaskForm.defaultProps = {
+  onItemAdded: () => {}
+};
+
 NewTaskForm.propTypes = {
-  onItemAdded: PropTypes.func.isRequired
+  onItemAdded: PropTypes.func
 };

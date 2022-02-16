@@ -14,6 +14,10 @@ export default function Header({onItemAdded}) {
   );
 };
 
+Header.defaultProps = {
+  onItemAdded: () => {}
+};
+
 Header.propTypes = {
-  onItemAdded: PropTypes.func.isRequired
+  onItemAdded: PropTypes.func
 };

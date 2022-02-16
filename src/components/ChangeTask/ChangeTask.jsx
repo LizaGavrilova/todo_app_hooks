@@ -30,8 +30,14 @@ export default function ChangeTask({id, label, onToggleLabel}) {
   );
 };
 
+ChangeTask.defaultProps = {
+  id: 0,
+  label: '',
+  onToggleLabel: () => {}
+};
+
 ChangeTask.propTypes = {
-  id: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired,
-  onToggleLabel: PropTypes.func.isRequired,
+  id: PropTypes.number,
+  label: PropTypes.string,
+  onToggleLabel: PropTypes.func
 };

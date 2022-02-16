@@ -23,6 +23,7 @@
       "jest": true
   },
   "rules": {
+      "jsx-a11y/no-noninteractive-element-interactions": 0,
       "jsx-a11y/no-autofocus": 0,
       "import/extensions": [
           "error",
