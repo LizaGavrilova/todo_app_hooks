@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './ChangeTask.scss';
 
-export default function ChangeTask({id, label, onToggleLabel}) {
+export default function ChangeTask({ id, label, onToggleLabel }) {
   const [newLabel, setNewLabel] = useState(label);
 
   const onLabelChange = (event) => {
@@ -13,31 +13,24 @@ export default function ChangeTask({id, label, onToggleLabel}) {
   const onKeyPress = (event) => {
     if (event.key === 'Enter') {
       onToggleLabel(id, newLabel);
-    };
+    }
   };
 
   return (
     <label>
-      <input
-        type="text"
-        className="edit"
-        value={newLabel}
-        onChange={onLabelChange}
-        onKeyPress={onKeyPress}
-        autoFocus
-      />
-    </label>      
+      <input type="text" className="edit" value={newLabel} onChange={onLabelChange} onKeyPress={onKeyPress} autoFocus />
+    </label>
   );
-};
+}
 
 ChangeTask.defaultProps = {
   id: 0,
   label: '',
-  onToggleLabel: () => {}
+  onToggleLabel: () => {},
 };
 
 ChangeTask.propTypes = {
   id: PropTypes.number,
   label: PropTypes.string,
-  onToggleLabel: PropTypes.func
+  onToggleLabel: PropTypes.func,
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {TasksFilter} from '../TasksFilter';
+import { TasksFilter } from '../TasksFilter';
 
 import './Footer.scss';
 
-export default function Footer({toDo, filter, onFilterChange, onDeleteCompleted}) {
+export default function Footer({ toDo, filter, onFilterChange, onDeleteCompleted }) {
   return (
     <footer className="footer">
       <span className="todo-count">{toDo} items left</span>
@@ -16,18 +16,18 @@ export default function Footer({toDo, filter, onFilterChange, onDeleteCompleted}
       </button>
     </footer>
   );
-};
+}
 
 Footer.defaultProps = {
   toDo: 0,
   filter: 'all',
   onFilterChange: () => {},
-  onDeleteCompleted: () => {}
+  onDeleteCompleted: () => {},
 };
 
 Footer.propTypes = {
   toDo: PropTypes.number,
   filter: PropTypes.string,
   onFilterChange: PropTypes.func,
-  onDeleteCompleted: PropTypes.func
+  onDeleteCompleted: PropTypes.func,
 };

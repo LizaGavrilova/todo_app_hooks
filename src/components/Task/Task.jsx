@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import {ChangeTask} from '../ChangeTask';
+import { ChangeTask } from '../ChangeTask';
 
 import './Task.scss';
 
-export default function Task({id, label, minutes, seconds, done, editing, filter, onDeleted, onToggleDone, timeAfterCreate, onToggleEdit, onToggleLabel}) {
+export default function Task({
+  id,
+  item,
+  filter,
+  onDeleted,
+  onToggleDone,
+  timeAfterCreate,
+  onToggleEdit,
+  onToggleLabel,
+}) {
+  const { label, minutes, seconds, done, editing } = item;
   const [min, setMin] = useState(minutes);
   const [sec, setSec] = useState(seconds);
   const [count, setCount] = useState(true);
@@ -15,7 +25,7 @@ export default function Task({id, label, minutes, seconds, done, editing, filter
   };
 
   const TimerPause = () => {
-    setCount(false);    
+    setCount(false);
   };
 
   useEffect(() => {
@@ -30,45 +40,43 @@ export default function Task({id, label, minutes, seconds, done, editing, filter
         }
         if (min === 0 && sec === 0) {
           onToggleDone(id);
-          setCount(false);  
+          setCount(false);
         } else if (sec > 0) {
-          setSec(sec - 1);          
+          setSec(sec - 1);
         } else if (sec === 0 && min > 0) {
           setMin(min - 1);
           setSec(59);
-        }  
+        }
       }, 1000);
-    }    
-    return () => clearInterval(newIntervalId);    
+    }
+    return () => clearInterval(newIntervalId);
   }, [sec, min, onToggleDone, id, count, done]);
 
-  const minutesOutput = (min < 10) ? `0${min}` : min;
-  const secondsOutput = (sec < 10) ? `0${sec}` : sec;
+  const minutesOutput = min < 10 ? `0${min}` : min;
+  const secondsOutput = sec < 10 ? `0${sec}` : sec;
 
-  
   let classNames;
   if (done) {
-    classNames = 'completed'; 
+    classNames = 'completed';
     if (filter === 'active') {
-      classNames += ' hidden'
+      classNames += ' hidden';
     } else {
       classNames = 'completed';
     }
-  };
+  }
   if (filter === 'done' && classNames !== 'completed') {
-    classNames = 'hidden'
-  };
+    classNames = 'hidden';
+  }
   if (editing) {
     classNames = 'editing';
-  };
+  }
 
-  const timer = (!done) ? (
+  const timer = !done ? (
     <div className="timer">
       <button className="icon-play" type="button" aria-label="Play" onClick={TimerStart} />
       <button className="icon-pause" type="button" aria-label="Pause" onClick={TimerPause} />
       {minutesOutput}:{secondsOutput}
     </div>
-
   ) : null;
 
   return (
@@ -88,34 +96,38 @@ export default function Task({id, label, minutes, seconds, done, editing, filter
       {editing ? <ChangeTask id={id} label={label} onToggleLabel={onToggleLabel} /> : null}
     </li>
   );
-};
+}
 
 Task.defaultProps = {
-  id: "",
-  label: '',
-  minutes: 0,
-  seconds: 0,
-  done: false,
-  editing: false,
+  id: '',
+  item: {
+    label: '',
+    minutes: 0,
+    seconds: 0,
+    done: false,
+    editing: false,
+  },
   filter: 'all',
   onDeleted: () => {},
   onToggleDone: () => {},
   onToggleEdit: () => {},
   onToggleLabel: () => {},
-  timeAfterCreate: ''
+  timeAfterCreate: '',
 };
 
 Task.propTypes = {
   id: PropTypes.string,
-  label: PropTypes.string,
-  minutes: PropTypes.number,
-  seconds: PropTypes.number,
-  done: PropTypes.bool,
-  editing: PropTypes.bool,
+  item: PropTypes.shape({
+    label: PropTypes.string,
+    minutes: PropTypes.number,
+    seconds: PropTypes.number,
+    done: PropTypes.bool,
+    editing: PropTypes.bool,
+  }),
   filter: PropTypes.string,
   onDeleted: PropTypes.func,
   onToggleDone: PropTypes.func,
   onToggleEdit: PropTypes.func,
   onToggleLabel: PropTypes.func,
-  timeAfterCreate: PropTypes.string
-}
+  timeAfterCreate: PropTypes.string,
+};

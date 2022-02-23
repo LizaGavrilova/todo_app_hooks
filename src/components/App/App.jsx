@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import shortid from "shortid";
+import shortid from 'shortid';
 
-import {Header} from '../Header';
-import {TaskList} from '../TaskList';
-import {Footer} from '../Footer';
+import { Header } from '../Header';
+import { TaskList } from '../TaskList';
+import { Footer } from '../Footer';
 
 import './App.scss';
 
-
 export default function App() {
-
   const createTodoItem = (label, min = 25, sec = 0) => {
     const createTime = new Date();
-    const minutes = (min === '') ? 25 : Number(min);
-    const seconds = (sec === '') ? 0 : Number(sec);
+    const minutes = min === '' ? 25 : Number(min);
+    const seconds = sec === '' ? 0 : Number(sec);
     return {
       id: shortid.generate(),
       label,
@@ -21,15 +19,12 @@ export default function App() {
       editing: false,
       dateCreate: createTime,
       minutes,
-      seconds
+      seconds,
     };
   };
 
-  const [todoData, setTodoData] = useState([
-    createTodoItem('Drink tea'),
-    createTodoItem('Pet the cat')
-  ]);
-  const [filter, setFilter] = useState('all');  
+  const [todoData, setTodoData] = useState([createTodoItem('Drink tea'), createTodoItem('Pet the cat')]);
+  const [filter, setFilter] = useState('all');
 
   const addItem = (text, min, sec) => {
     const newItem = createTodoItem(text, min, sec);
@@ -100,4 +95,4 @@ export default function App() {
       </section>
     </div>
   );
-};
+}

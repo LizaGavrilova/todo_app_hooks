@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './TasksFilter.scss';
 
-export default function TasksFilter({filter, onFilterChange}) {
+export default function TasksFilter({ filter, onFilterChange }) {
   const filterButtons = [
     { name: 'all', label: 'All' },
     { name: 'active', label: 'Active' },
@@ -23,8 +23,8 @@ export default function TasksFilter({filter, onFilterChange}) {
     );
   });
 
-  return <ul className="filters">{buttons}</ul>; 
-};
+  return <ul className="filters">{buttons}</ul>;
+}
 
 TasksFilter.defaultProps = {
   filter: 'all',
@@ -33,5 +33,5 @@ TasksFilter.defaultProps = {
 
 TasksFilter.propTypes = {
   filter: PropTypes.string,
-  onFilterChange: PropTypes.func
+  onFilterChange: PropTypes.func,
 };
