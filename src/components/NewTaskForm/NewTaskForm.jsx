@@ -93,7 +93,7 @@ export default function NewTaskForm({ onItemAdded }) {
         id="minutes"
         type="number"
         style={{ boxShadow: minColor }}
-        onBlur={(evt) => blurHandler(evt)}
+        onBlur={(event) => blurHandler(event)}
         onChange={onMinChange}
         placeholder="Min"
         value={minValue}
@@ -106,7 +106,7 @@ export default function NewTaskForm({ onItemAdded }) {
         id='seconds'
         type="number"
         style={{ boxShadow: secColor }}
-        onBlur={(evt) => blurHandler(evt)}
+        onBlur={(event) => blurHandler(event)}
         onChange={onSecChange}
         placeholder="Sec"
         value={secValue}
